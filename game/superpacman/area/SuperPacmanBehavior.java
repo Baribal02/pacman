@@ -12,6 +12,8 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior {
+	private int totalDiamond;
+	public int getTotalDiamond() {return totalDiamond;}
     public enum SuperPacmanCellType{
         //https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
         NONE(0), // never used as real content
@@ -127,7 +129,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
     
     public void registerActors(Area area){
-    	int totalDiamond=0;
+    	int total=0;
         for(int y = 0; y<area.getHeight();++y){
             for(int x = 0; x<area.getWidth();++x){
                 
@@ -136,7 +138,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
                 }
                 if(((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.FREE_WITH_DIAMOND){
                     area.registerActor(new Diamond(area, new DiscreteCoordinates(x,y)));
-                    totalDiamond++;
+                    total++;
                     
                 }
                 if(((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.FREE_WITH_CHERRY){
@@ -147,8 +149,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
                 }
             }
         }
-        ((SuperPacmanArea)area).setDiamond(totalDiamond);
-        ((SuperPacmanArea)area).test();
+        totalDiamond=total;
    }
 	
 }

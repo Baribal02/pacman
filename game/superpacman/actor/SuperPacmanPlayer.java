@@ -40,23 +40,38 @@ public class SuperPacmanPlayer extends Player {
 			 setIsPassingADoor(door);
 			 }
 		 public void interactWith(Diamond dia) {
+			 if(!dia.collected) {
 			 dia.isWalkedOn();
 			 score+=dia.getScore();
 			 ((SuperPacmanArea) getOwnerArea()).collectDiamond();
+			
+			 }
 			 
 		 }
 		 public void interactWith(Cherry cher) {
-			 cher.isWalkedOn();
-			 score+=cher.getScore();
+			 if (!cher.collected) {
+				 cher.isWalkedOn();
+				 score+=cher.getScore();
+				
+			 }
+			 
 			
 		 }
 		 public void interactWith(Bonus bonus) {
+			 if(!bonus.collected) {
+				 
+			
 			 bonus.isWalkedOn();
+			 
+			 }
 			 // attribut invincible = true;
 		 }
 		 public void interactWith(Key key) {
+			 if(!key.collected) {
 			 key.isWalkedOn();
 			 key.estRamasse();
+			
+			 }
 		 }
 	}
 
@@ -66,6 +81,7 @@ public class SuperPacmanPlayer extends Player {
     private Animation animation;
     private Orientation desiredOrientation;
     private SuperPacmanPlayerHandler handler;
+    
     
     private int ptVie;
     private int score;
@@ -99,12 +115,11 @@ public class SuperPacmanPlayer extends Player {
     public void draw(Canvas canvas) {
     	animation.draw(canvas);
     	gui.draw(canvas);
-       // message.draw(canvas);
+       
     }
 
     @Override
     public void update(float deltaTime) {
-    	((SuperPacmanArea) getOwnerArea()).test();
         Keyboard keyboard= getOwnerArea().getKeyboard();
         
         desiredOrientation = desiredOrientation(keyboard);

@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Ferme;
 import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Village;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacman extends RPG {
@@ -44,11 +45,14 @@ public class SuperPacman extends RPG {
 			initPlayer(new SuperPacmanPlayer(area,Level0.PLAYER_SPAWN_POSITION));
 			area.registerActor(this.getPlayer());
 			area.setViewCandidate(this.getPlayer());
+			
 			return true;
 		}
 		return false;
 	}
 	
+	
+	 
 	
 	
 	

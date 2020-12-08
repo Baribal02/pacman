@@ -8,7 +8,7 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanArea extends Area implements Logic{
     private SuperPacmanBehavior behavior;
-    private int totalDiamond;
+
     private int collectedDiamond;
     @Override
     public boolean begin(Window window, FileSystem fileSystem){
@@ -16,7 +16,7 @@ public class SuperPacmanArea extends Area implements Logic{
             behavior = new SuperPacmanBehavior(window, getTitle());
             setBehavior(behavior);
             createArea();
-            totalDiamond=0;
+            
             collectedDiamond=0;
             return true;
         }
@@ -31,7 +31,7 @@ public class SuperPacmanArea extends Area implements Logic{
 
     }
     public void createArea() {
-        behavior.registerActors((Area)this);
+        behavior.registerActors(this);
         
     }
     @Override
@@ -43,26 +43,20 @@ public class SuperPacmanArea extends Area implements Logic{
         return 50.f;
     }
     
-    public void setDiamond(int diamond) {totalDiamond =diamond ;
-
-    }
+   
     public void collectDiamond() {collectedDiamond ++;}
-    public void test() {System.out.println("total diamond : "+totalDiamond);
-    System.out.println("Collected diamond :"+collectedDiamond);
-    System.out.println("signal ison "+isOn());
-    System.out.println("Signal isOFF "+isOff());
-    }
+   
     
 	@Override
 	public boolean isOn() {
 
 		// TODO Auto-generated method stub
-		return (collectedDiamond>10);
+		return (collectedDiamond==behavior.getTotalDiamond());
 	}
 	@Override
 	public boolean isOff() {
 		// TODO Auto-generated method stub
-		return (collectedDiamond<10);
+		return (collectedDiamond!=behavior.getTotalDiamond());
 	}
 	@Override
 	public float getIntensity() {
